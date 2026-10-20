@@ -1,10 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuitRO - Stop met Vapen</title>
+    <style>
+        /* Dit zorgt voor de achtergrond en styling van de 'telefoon' */
+        body {
+            background-color: #1a1a2e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* De smartphone container */
+        .phone-container {
+            width: 360px;
+            height: 740px;
+            background: linear-gradient(180deg, #16213e 0%, #0f172a 100%);
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 8px solid #222530;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* App Titel */
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 40px;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, #00fff0, #00ff66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: #8fa0c4;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+        }
+
+        /* Dashboard Statistieken Box */
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .stat-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #00fff0;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* De Grote Actieknop */
+        .btn-action {
+            background: linear-gradient(135deg, #ff007f 0%, #7928ca 100%);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 0, 127, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: auto;
+            margin-bottom: 40px;
+            width: 80%;
+        }
+
+        .btn-action:active {
+            transform: scale(0.95);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welkom bij QuitRO</h1>
-    <p>Dit wordt de app die je helpt te stoppen met vapen en geld te besparen!</p>
+
+    <div class="phone-container">
+        <h1>QuitRO</h1>
+        <div class="subtitle">Jouw vape-vrije toekomst</div>
+
+        <!-- Teller voor tijd gestopt -->
+        <div class="stat-box">
+            <div class="stat-title">Tijd Vape-Vrij</div>
+            <div class="stat-value" id="time-counter">0s</div>
+        </div>
+
+        <!-- Teller voor bespaard geld -->
+        <div class="stat-box">
+            <div class="stat-title">Geld Bespaard</div>
+            <div class="stat-value" id="money-counter">€ 0,00</div>
+        </div>
+
+        <!-- Knop voor motivatie -->
+        <button class="btn-action" onclick="toonMotivatie()">Ik heb een craving!</button>
+    </div>
+
+    <script>
+        // Startwaarden (verander deze naar wat een gemiddelde vaper uitgeeft)
+        let secondenGestopt = 0;
+        const geldPerSeconde = 0.0002; // Dit komt ongeveer neer op €17,- per week
+
+        // Functie die elke seconde telt en het geld berekent
+        setInterval(() => {
+            secondenGestopt++;
+            
+            // Update tijdweergave
+            document.getElementById('time-counter').innerText = secondenGestopt + "s";
+            
+            // Update geldweergave
+            let bespaardGeld = secondenGestopt * geldPerSeconde;
+            document.getElementById('money-counter').innerText = "€ " + bespaardGeld.toFixed(4);
+        }, 1000);
+
+        // Actie voor de knop
+        function toonMotivatie() {
+            alert("Zet door! Denk aan het geld dat je bespaart en je gezondheid. Neem 3 keer diep adem! 🚭");
+        }
+    </script>
 </body>
 </html>
